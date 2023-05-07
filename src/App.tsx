@@ -13,7 +13,7 @@ export interface ITask {
 }
 
 function App() {
-  const [tasks] = useState<ITask[]>([
+  const [tasks, setTasks] = useState<ITask[]>([
     {
       id: uuidv4(),
       title: 'Estudar React',
@@ -31,9 +31,19 @@ function App() {
     }
   ]);
 
+  function handleAddTask(taskTitle: string) {
+    const newTask = {
+      id: uuidv4(),
+      title: taskTitle,
+      isCompleted: false,
+    }
+
+    setTasks([...tasks, newTask])
+  }
+
   return (
     <>
-      <Header />
+      <Header onAddTask={handleAddTask} />
       <Tasks tasks={tasks} />
     </>
   )
