@@ -13,7 +13,7 @@ export interface ITask {
 }
 
 function App() {
-  const [tasks, setTasks] = useState<ITask[]>([
+  const [tasks] = useState<ITask[]>([
     {
       id: uuidv4(),
       title: 'Estudar React',
