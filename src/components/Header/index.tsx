@@ -2,20 +2,22 @@ import { PlusCircle } from '@phosphor-icons/react';
 import todoLogo from '../../assets/todo-logo.svg';
 
 import styles from './Header.module.css';
+import { ChangeEvent, FormEvent, useState } from 'react';
 
 interface  Props {
   onAddTask: (taskTitle: string) => void;
 }
 
 export function Header({ onAddTask } : Props) {
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const input = e.currentTarget.querySelector('input');
+  const [title, setTitle] = useState('');
 
-    if (input) {
-      onAddTask(input.value);
-      input.value = '';
-    }
+  function onChangeTitle(e: ChangeEvent<HTMLInputElement>) {
+    setTitle(e.target.value);
+  }
+  
+  function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+    onAddTask(title);
   }
 
   return (
@@ -23,7 +25,7 @@ export function Header({ onAddTask } : Props) {
       <img src={todoLogo} alt='Logotipo do ToDo List' />
 
       <form className={styles.newTaskForm} onSubmit={handleSubmit}>
-        <input placeholder='Adicione uma nova tarefa' />
+        <input placeholder='Adicione uma nova tarefa' onChange={onChangeTitle} value={title} />
         <button>
           Criar
           <PlusCircle size={18} />
