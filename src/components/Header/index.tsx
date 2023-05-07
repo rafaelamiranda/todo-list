@@ -18,6 +18,7 @@ export function Header({ onAddTask } : Props) {
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
     onAddTask(title);
+    setTitle('');
   }
 
   return (
@@ -25,7 +26,11 @@ export function Header({ onAddTask } : Props) {
       <img src={todoLogo} alt='Logotipo do ToDo List' />
 
       <form className={styles.newTaskForm} onSubmit={handleSubmit}>
-        <input placeholder='Adicione uma nova tarefa' onChange={onChangeTitle} value={title} />
+        <input 
+          placeholder='Adicione uma nova tarefa' 
+          onChange={onChangeTitle} 
+          value={title} 
+        />
         <button>
           Criar
           <PlusCircle size={18} />

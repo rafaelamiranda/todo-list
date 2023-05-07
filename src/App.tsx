@@ -41,10 +41,15 @@ function App() {
     setTasks([...tasks, newTask])
   }
 
+  function handleRemoveTask(taskId: string) {
+    const newTasks = tasks.filter(task => task.id !== taskId)
+    setTasks(newTasks)
+  }
+
   return (
     <>
       <Header onAddTask={handleAddTask} />
-      <Tasks tasks={tasks} />
+      <Tasks tasks={tasks} onDeleteTask={handleRemoveTask} />
     </>
   )
 }
