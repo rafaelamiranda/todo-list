@@ -8,7 +8,7 @@ export function Header() {
     <header className={styles.header}>
       <img src={todoLogo} alt='Logotipo do ToDo List' />
 
-      <form className={styles.newTaskForm}>
+      <form className={styles.newTaskForm} >
         <input placeholder='Adicione uma nova tarefa' />
         <button>
           Criar
