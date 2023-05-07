@@ -1,13 +1,15 @@
 import { ITask } from '../../App';
 import { Task } from '../Task'
+import { ClipboardText } from '@phosphor-icons/react'
 import styles from './Tasks.module.css'
 
 interface Props {
   tasks: ITask[];
   onDeleteTask:  (taskId: string) => void;
+  onCompleteTask: (taskId: string) => void;
 }
 
-export function Tasks({ tasks, onDeleteTask  }: Props) {
+export function Tasks({ tasks, onDeleteTask, onCompleteTask  }: Props) {
   const taskLength = tasks.length;
   const completedTasks = tasks.filter(task => task.isCompleted).length;
   
@@ -25,8 +27,22 @@ export function Tasks({ tasks, onDeleteTask  }: Props) {
       </header>  
       <div className={styles.list}>
         {tasks.map(task => (
-          <Task task={task} key={task.id}  onDeleteTask={onDeleteTask} />
+          <Task 
+            task={task} 
+            key={task.id} 
+            onDeleteTask={onDeleteTask}
+            onCompleteTask={onCompleteTask}
+          />
         ))}
+
+        {taskLength === 0 && (
+          <div className={styles.empty}>
+            <ClipboardText size={56} />
+            <p>Nenhuma tarefa cadastrada</p>
+            <span>Crie tarefas e organize seus itens a fazer</span>
+          </div>
+        )}
+
       </div>
     
     </section>
